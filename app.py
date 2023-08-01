@@ -1,6 +1,7 @@
 import os
-
+import base64
 import openai
+import plantuml
 from flask import Flask, redirect, render_template, request, url_for
 
 app = Flask(__name__)
@@ -15,21 +16,23 @@ def index():
             model="text-davinci-003",
             prompt=generate_prompt(animal),
             temperature=0.6,
+            max_tokens=2048,
+            top_p=1,
         )
-        return redirect(url_for("index", result=response.choices[0].text))
+        result = response.choices[0].text
+        image_data = generate_img(result)
+        image_data_base64 = base64.b64encode(image_data).decode("utf-8")
+        return render_template("index.html", result=result, image_data=image_data_base64)
 
     result = request.args.get("result")
     return render_template("index.html", result=result)
 
-
 def generate_prompt(animal):
-    return """Suggest three names for an animal that is a superhero.
+    return "Generate the plant uml code for the given specification." + animal
 
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: {}
-Names:""".format(
-        animal.capitalize()
-    )
+def generate_img(result):
+    url = "http://www.plantuml.com/plantuml/img/"
+    image = plantuml.PlantUML(url).processes(result)
+    with open('diagram.png', 'wb') as f:
+        f.write(image)
+    return image

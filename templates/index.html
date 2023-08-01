@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>OpenAI Quickstart</title>
+  <title>UML Diagram</title>
   <link
     rel="shortcut icon"
     href="{{ url_for('static', filename='dog.png') }}"
@@ -9,13 +9,24 @@
 </head>
 
 <body>
-  <img src="{{ url_for('static', filename='dog.png') }}" class="icon" />
-  <h3>Name my pet</h3>
+  <img
+    src="{{ url_for('static', filename='dog.png') }}"
+    class="icon"
+    alt="Adi rocks"
+  />
+  <h3>Enter your Requirements as clear as possible</h3>
   <form action="/" method="post">
-    <input type="text" name="animal" placeholder="Enter an animal" required />
+    <input
+      type="text"
+      name="animal"
+      placeholder="Use case diagram for a bank website"
+      required
+    />
     <input type="submit" value="Generate names" />
   </form>
-  {% if result %}
+  <!-- {% if result %}
   <div class="result">{{ result }}</div>
+  {% endif %} {% if image_data %} -->
+  <img src="data:image/png;base64,{{ image_data }}" alt="UML Diagram" />
   {% endif %}
 </body>
