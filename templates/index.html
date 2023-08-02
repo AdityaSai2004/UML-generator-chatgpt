@@ -3,19 +3,25 @@
   <title>UML Diagram</title>
   <link
     rel="shortcut icon"
-    href="{{ url_for('static', filename='dog.png') }}"
+    href="{{ url_for('static', filename='uml.png') }}"
   />
   <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
 </head>
 
 <body>
+  <h1>UML Generator</h1>
   <img
-    src="{{ url_for('static', filename='dog.png') }}"
+    src="{{ url_for('static', filename='uml2.png') }}"
     class="icon"
     alt="Adi rocks"
   />
-  <h3>Enter your Requirements as clear as possible</h3>
   <form action="/" method="post">
+    <label for="openai_api_key">OpenAI API Key:</label>
+    <input type="textarea" id="openai_api_key" name="openai_api_key" required />
+    <br />
+    <label for="animal"
+      >Enter your requirements as descriptive as possible:</label
+    >
     <input
       type="text"
       name="animal"
