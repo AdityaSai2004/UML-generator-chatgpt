@@ -50,4 +50,4 @@ def generate_img(result):
     return image
 
 if __name__ == "__main__":
-    app.run(debug=True, port=1000)
+    app.run(debug=True, port=5000)
