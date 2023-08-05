@@ -48,3 +48,6 @@ def generate_img(result):
     with open('diagram.png', 'wb') as f:
         f.write(image)
     return image
+
+if __name__ == "__main__":
+    app.run(debug=True, port=1000)
